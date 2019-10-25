@@ -1,4 +1,3 @@
-import _axios from '../plugins/axios'
 import UserModel from './interfaces/user'
 import Response from './interfaces/request'
 import RequestPattern from './requestPattern'
