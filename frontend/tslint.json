@@ -16,6 +16,11 @@
     "ordered-imports": false,
     "semicolon": false,
     "trailing-comma": false,
+    "no-unused-expression" : false,
+    "member-ordering" : false,
+    "curly" : false,
+    "no-trailing-whitespace": false,
+    "no-string-literal" : false,
     "quotemark": [true, "single"]
   }
 }
