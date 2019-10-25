@@ -4,9 +4,19 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/index.ts ",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development nodemon src/index.ts ",
+    "prepush" : "npm run test:covarage",
+    "test:watch": "npm run test -- --watch",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha tests/**/*.spec.js",
+    "test:unit": "NODE_ENV=test ./node_modules/.bin/mocha tests/unit/*.spec.js",
+    "test:covarage" : "nyc npm test"
+  },
+  "nyc":{
+    "functions" : 80,
+    "lines": 80,
+    "check-covarage": true,
+    "reporter" : ["text","html"]
   },
   "keywords": [],
   "author": "",
@@ -31,7 +41,10 @@
     "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.23",
     "@types/node": "^12.11.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
+    "nyc": "^14.1.1",
     "typescript": "^3.6.4"
   }
 }
