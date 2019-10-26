@@ -1,0 +1,57 @@
+<svg
+   width="420mm"
+   height="197mm"
+   viewBox="10 0 420 350"
+   version="1.1"
+   preserveAspectRatio="none"
+   id="SVGRoot">
+   
+   <style type="text/css">
+      .bg1{
+         fill:#000000;
+         stroke:#000000;
+         stroke-width:0.40671197px;
+         stroke-opacity:1;
+         animation: moveToLeft 5.5s linear alternate infinite;
+      }
+      .bg2{
+         fill:rgba(0,0,0,0.2);
+         stroke-width:0.40671197px;
+         animation: moveToLeft 3s linear alternate infinite;
+      }
+
+      @keyframes moveToLeft {
+         from {
+            transform: translateX(-0px );
+         }
+         to {
+            transform: translateX( 10px );
+         }
+      }
+   </style>
+
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Camada 1">
+    <path
+       id="path12"
+       class="bg1"
+       d="m 1.2397176,-69.530795 c -0.042162,0.03738 -0.089237,0.07074 -0.1431437,0.09922 -1.11481543,38.569124 -1.15434431,37.863528 -1.15434426,113.952918 C 81.563643,45.4494 30.313608,226.66603 122.17827,227.43332 224.37938,231.44663 164.67835,44.956857 274.11039,46.044548 369.60566,51.318432 344.07464,236.48186 420.62714,227.26132 420.73229,139.13894 419.93957,34.736974 419.8617,-69.448113 H 1.2402344 c 0,0 -0.1435865,0.03337 -0.1436605,0.01654 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccc" />
+  </g>
+
+  <g
+     id="layer2"
+     inkscape:groupmode="layer"
+     inkscape:label="Camada 2">
+    <path
+       id="path12"
+       class="bg2"
+       d="m 1.2397176,-69.530795 c -0.042162,0.03738 -0.089237,0.07074 -0.1431437,0.09922 -1.11481543,38.569124 -1.15434431,37.863528 -1.15434426,113.952918 C 81.563643,45.4494 30.313608,226.66603 122.17827,227.43332 224.37938,231.44663 164.67835,44.956857 274.11039,46.044548 369.60566,51.318432 344.07464,236.48186 420.62714,227.26132 420.73229,139.13894 419.93957,34.736974 419.8617,-69.448113 H 1.2402344 c 0,0 -0.1435865,0.03337 -0.1436605,0.01654 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccc" />
+  </g>
+
+</svg>

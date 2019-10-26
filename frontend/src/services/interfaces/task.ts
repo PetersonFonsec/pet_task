@@ -7,5 +7,6 @@ export default interface TaskModel {
     project ?: string,
     responsible ?: string,
     state ?: Stats,
-    estimated_time ?: number,
+    estimated_time ?: number
+
 }

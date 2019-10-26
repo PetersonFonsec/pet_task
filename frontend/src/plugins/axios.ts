@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
 import { baseURL } from '../global'
-import axios from "axios";
+import axios from 'axios';
 
 export default axios.create({ baseURL })

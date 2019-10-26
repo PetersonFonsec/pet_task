@@ -9,18 +9,20 @@
     ]
   },
   "rules": {
-    "indent": [true, "spaces", 2],
-    "interface-name": false,
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
-    "semicolon": false,
-    "trailing-comma": false,
-    "no-unused-expression" : false,
-    "member-ordering" : false,
-    "curly" : false,
     "no-trailing-whitespace": false,
+    "no-unused-expression" : false,
     "no-string-literal" : false,
-    "quotemark": [true, "single"]
+    "member-ordering" : false,
+    "ordered-imports": false,
+    "trailing-comma": false,
+    "interface-name": false,
+    "quotemark": [true, "single"],
+    "semicolon": false,
+    "one-line": false,
+    "eofline": false,
+    "indent": [true, "spaces", 2],
+    "curly" : false
   }
 }
