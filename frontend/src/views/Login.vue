@@ -1,11 +1,21 @@
 <template>
     <div id='screen-login' class="box">
+    
+        <router-view/>
 
-        <cat-face/>
+        <!-- <template :if="decision()">
 
-        <button class="btn sign-up">Criar Conta</button>
-        <button class="btn login">Entrar</button>
+            <cat-face/>
 
+            <router-link class="btn sign-up" to="signup" tag="button">
+                Criar Conta
+            </router-link>
+
+            <router-link class="btn login" to="login" tag="button">
+                Entrar
+            </router-link>
+
+        </template> -->
     </div>
 </template>
 
@@ -17,15 +27,19 @@ export default Vue.extend({
     name: 'Login',
     components: {
         CatFace
+    },
+    computed: {
+        decision(){
+            return true 
+        }
     }
-
 })
 </script>
 
 <style lang="css" scoped>
 .btn {
     width: 100%;
-    padding: 5px 20px ;
+    padding: 10px 20px ;
     font-weight: 600;
     letter-spacing: 2px;
     border-radius: 20px;
@@ -47,13 +61,15 @@ export default Vue.extend({
     transform: scale(.9);
     padding: 5px 10px;
 }
+
 #screen-login{
     width: 300px;
-    height: 400px;
-    margin:  30px auto;
+    height: 450px;
+    margin: 30px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
 }
+
 </style>
