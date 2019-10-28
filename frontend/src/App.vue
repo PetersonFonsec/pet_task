@@ -25,7 +25,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="css">
   body{
     overflow-x: hidden;
   }

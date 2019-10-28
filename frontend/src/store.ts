@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from './plugins/axios'
 import { userToken } from './global'
 
 Vue.use(Vuex);
@@ -8,12 +7,14 @@ Vue.use(Vuex);
 interface StateVuex {  
   userLogged: boolean,
   viewBox: string
+  theme: string,
 }
 
 export default new Vuex.Store<StateVuex>({
   state: {
     userLogged: false,
-    viewBox: '10 0 420 10'
+    viewBox: '10 0 420 10',
+    theme: 'dark',
   },
   mutations: {
 
@@ -23,13 +24,21 @@ export default new Vuex.Store<StateVuex>({
 
       localStorage.setItem(userToken, TokenFormated)
 
-      axios
-
       state.userLogged = true
 
       state.viewBox = '10 0 420 350'
 
-    }
+    },
+
+    logout(state: StateVuex) {
+      
+      localStorage.removeItem(userToken)
+
+      state.userLogged = false
+
+      state.viewBox = '10 0 420 10'
+
+    },
 
   },
   actions: {

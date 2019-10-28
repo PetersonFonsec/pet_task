@@ -1,9 +1,12 @@
 import Auth from '../services/auth'
-import { Router } from 'express'
+import { Router, Response, Request } from 'express'
 
 const route = Router()
 
-route.get('/login', Auth.login )
+route.post('/login', Auth.login )
+
+route.post('/validToken', Auth.validToken, 
+    ( req:Request, res:Response ) => res.status(200).send() )
 
 route.get('/forgetPassword', Auth.forgetPassword )
 

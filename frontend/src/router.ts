@@ -1,16 +1,16 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Auth from './services/auth'
+import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ './views/Login.vue'),
+    redirect: '/auth/',
   },
   {
-    path: '/auth',
+    path: '/auth/',
     name: 'auth',
     component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
     children: [
@@ -24,12 +24,29 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ './views/Login.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
   base: process.env.BASE_URL,
+  mode: 'history',
   routes,
 });
+
+router.beforeEach( async ( to, from, next ) => {
+
+  const { requiresAuth } = to.meta
+
+  if ( requiresAuth && ! await Auth.validToken() ) next('/auth/')
+  else next()
+  
+})
 
 export default router;

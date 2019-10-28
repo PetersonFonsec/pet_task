@@ -33,7 +33,8 @@ class Auth {
         return sign(payload, this.secret, this.expiresToken)
     }
 
-    public validToken(req:AuthRequest, res:Response, next:NextFunction){
+    public validToken = (req:AuthRequest, res:Response, next:NextFunction) => {
+
         const { authorization } = req.headers
 
         if( !authorization ) 
@@ -60,11 +61,11 @@ class Auth {
             })
 
         }catch(error){
-            if(error) return res.status(401).send({ error })
+            return res.status(401).send({ error })
         }
     }
 
-    public async login(req:AuthRequest, res:Response):Promise<Response>{
+    public login = async (req:AuthRequest, res:Response) => {
         
         const { password, email } = req.body
 
@@ -84,13 +85,13 @@ class Auth {
             if( !passwordValid )
                 return res.status(401).send({ error: 'Senha invalida' })
             
-            const { _id } = userExist
+            const { _id: id } = userExist
 
-            const token = this.createToken(_id)
+            const token = this.createToken({ id })
 
             delete userExist.password
 
-            return res.status(401).send({ 
+            return res.status(200).send({ 
                 token,
                 result: { 
                     ...userExist

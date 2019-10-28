@@ -1,13 +1,18 @@
 <template>
     <div id='screen-login' class="box">
-    
-        <router-view/>
 
-        <!-- <template :if="decision()">
+        <transition mode="out-in"      
+        enter-active-class="enter"  
+        leave-active-clasnos="leave">
+
+            <router-view/>
+        </transition>
+
+        <div v-if="show">
 
             <cat-face/>
 
-            <router-link class="btn sign-up" to="signup" tag="button">
+            <router-link class="btn sign-up mb-3 mt-3" to="signup" tag="button">
                 Criar Conta
             </router-link>
 
@@ -15,7 +20,7 @@
                 Entrar
             </router-link>
 
-        </template> -->
+        </div>
     </div>
 </template>
 
@@ -25,12 +30,17 @@ import CatFace from '../components/logo/catface.vue'
 
 export default Vue.extend({
     name: 'Login',
+    watch: {
+        $route(to) {
+            this.show = to.fullPath === '/auth/'
+        }
+    },
     components: {
         CatFace
     },
-    computed: {
-        decision(){
-            return true 
+    data() {
+        return {
+            show: true,
         }
     }
 })
@@ -70,6 +80,25 @@ export default Vue.extend({
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+}
+
+@keyframes born {
+    from{
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+ 
+.enter{
+    animation: born .7s linear;
+}
+
+.leave{
+    animation: born .7s linear reverse;
 }
 
 </style>

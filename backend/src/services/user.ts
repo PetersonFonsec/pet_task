@@ -5,45 +5,46 @@ import Auth from './auth'
 
 class User {
 
-    private async emailExits(email:String):Promise<Boolean> {
+    public async emailExits(email:String):Promise<Boolean> {
 
         try {
 
             const exist = await userModel.findOne({ email })
-
+            
             return !!(exist)
 
         } catch (error) {
-
            return false            
         }
 
     }
 
-    public async create( req:Request, res:Response ){
+    public create = async ( req:Request, res:Response ) => {
         
         const { body } = req
 
         const { email, password, name } = body
         
         if( !name || !email || !password)
-            return res.status(401).send({ error: 'Nome, Email e ou Senha não informados' })
-            
-        try {
-            
-            const exist = await this.emailExits(email)
-                
-            if(exist) return res.status(401).send({ error: 'Email já cadastrado' })
+            return res.status(401).send({ error: 'Nome, Email e ou Senha não informados' })            
 
+        try {
+
+            const exist = await this.emailExits(email)
+
+            if(exist) return res.status(401).send({ error: 'Email já cadastrado' })
+            
             body.password = hashSync(body.password, genSaltSync(10) )
 
-            const user = await userModel.create({ ...body})
+            const user = await userModel.create(body)
 
             if(!user) return res.status(401).send({ error: 'Usuário não criado' })
 
+            const token = Auth.createToken({ _id: user._id}) 
+            
             return res.status(200).send({
-                result: { ...user },
-                token: Auth.createToken(user._id)
+                token,
+                result: user
             })
 
         } catch (error) {

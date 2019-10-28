@@ -1,21 +1,24 @@
 <template>
     <div class="form-login">
-        <b-form @submit="_submit" @reset="_reset">
+        <b-form @submit.prevent="_submit" @reset="_reset">
 
             <label for="email">Email</label>
-            <input type="email" id="email" v-model="email">
+            <b-form-input type="email" name="email" id="email" v-model="email"/>
             
             <label for="name">Nome</label>
-            <input type="name" id="name" v-model="name">
+            <b-form-input name="name" id="name" v-model="name"/>
 
             <label for="password">Senha</label>
-            <input type="password" id="password" v-model="password">
+            <b-form-input type="password" name="password" id="password" v-model="password"/>
 
-                <button class="btn login mb-3">
+                <button type="submit" class="btn login mb-3">
                     Criar Conta
                 </button>
 
-                <router-link class="btn sign-up" to="signup" tag="button">
+                <router-link 
+                    class="btn sign-up"
+                    to="login"
+                    tag="button">
                     Já tem conta
                 </router-link>
 
@@ -46,11 +49,22 @@ export default Vue.extend({
             return this.password && this.email && this.name
         },
 
-        async _submit(data: UserCreate) {
+        async _submit() {
 
             if ( !this.valid() ) return false
+
+            const { name, password, email } = this
             
-            const result = await User.create(data)
+            const result = await User.create({ name, password, email })
+
+            if ( result.success ){
+
+                const { token } = result.data.result
+
+                this.$store.commit('login', token)
+
+                this.$router.push('/home')
+            }
 
         },
 

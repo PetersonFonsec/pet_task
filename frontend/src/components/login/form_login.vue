@@ -1,12 +1,12 @@
 <template>
     <div class="form-login">
-        <b-form @submit="_submit" @reset="_reset">
+        <b-form @submit.prevent="_submit" @reset="_reset">
 
             <label for="email">Email</label>
-            <input type="email" id="email" v-model="email">
+            <input name="email" type="email" id="email" v-model="email"/>
             
             <label for="password">Senha</label>
-            <input type="password" id="password" v-model="password">
+            <input name="password" type="password" id="password" v-model="password"/>
 
             <div class="teste">
 
@@ -14,7 +14,10 @@
                     Entrar
                 </button>
 
-                <router-link class="btn sign-up width-45-p ml-3 padding-15" to="signup" tag="button">
+                <router-link 
+                    class="btn sign-up width-45-p ml-3 padding-15"
+                    to="signup"
+                    tag="button">
                     Criar Conta
                 </router-link>
 
@@ -45,13 +48,22 @@ export default Vue.extend({
             return this.password !== '' && this.email !== ''
         },
 
-        async _submit(data: LoginData) {
+        async _submit() {
 
             if ( !this.valid() ) return false
 
-            const { password, email } = data
+            const { password, email } = this
 
             const result = await Auth.login(password, email)
+
+            if ( result.success ){
+
+                const { token } = result.data
+
+                this.$store.commit('login', token)
+
+                this.$router.push('/home')
+            }
 
         },
 
