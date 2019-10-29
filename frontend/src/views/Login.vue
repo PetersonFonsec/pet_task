@@ -49,37 +49,37 @@ export default Vue.extend({
 <style lang="css" scoped>
 .btn {
     width: 100%;
-    padding: 10px 20px ;
     font-weight: 600;
+    padding: 10px 20px;
     letter-spacing: 2px;
     border-radius: 20px;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 .login {
+    color: #000;
     border: 1px solid #fff;
     background-color: #fff;
-    color: #000;
 }
 .sign-up{
-    border: 1px solid rgba(255,255,255,.5);
-    background-color: transparent;
     color: #FFF;
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,.5);
 }
 .box {
-    border-radius: 5px;
-    transition: 2s linear all;
-    transform: scale(.9);
     padding: 5px 10px;
+    border-radius: 5px;
+    transform: scale(1);
+    transition: 2s linear all;
 }
 
 #screen-login{
     width: 300px;
     height: 450px;
-    margin: 30px auto;
     display: flex;
+    margin: 30px auto;
     align-items: center;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 @keyframes born {

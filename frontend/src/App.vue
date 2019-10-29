@@ -2,8 +2,14 @@
   <div id="app">
 
     <background-animation :viewBox="viewBox"/>
+    
+    <transition 
+      mode="out-in"      
+      enter-active-class="enter"  
+      leave-active-clasnos="leave">
 
-    <router-view/>
+        <router-view/>
+    </transition>
 
   </div>
 </template>
@@ -30,8 +36,27 @@ export default Vue.extend({
     overflow-x: hidden;
   }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    text-align: center;
     color: #2c3e50;
+    text-align: center;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
   }
+  @keyframes born {
+    from{
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to{
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  
+  .enter{
+    animation: born .7s linear;
+  }
+
+  .leave{
+    animation: born .7s linear reverse;
+  }
+
 </style>  
