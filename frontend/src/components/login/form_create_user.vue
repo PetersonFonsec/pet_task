@@ -29,6 +29,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import User from '../../services/user'
+import AlertMixin from '../../mixins/alert'
+import { ToastObject } from 'vue-toasted'
+import Component, { mixins } from 'vue-class-component'
 
 interface UserCreate {
     name: string
@@ -36,45 +39,42 @@ interface UserCreate {
     password: string
 }
 
-export default Vue.extend({
+@Component
+export default class UserFormCreate extends mixins(AlertMixin){
 
-    data: () => ({
-        email: '',
-        name: '',
-        password: ''
-    }),
-
-    methods: {
-        valid() {
-            return this.password && this.email && this.name
-        },
-
-        async _submit() {
-
-            if ( !this.valid() ) return false
-
-            const { name, password, email } = this
-            
-            const result = await User.create({ name, password, email })
-
-            if ( result.success ){
-
-                const { token } = result.data.result
-
-                this.$store.commit('login', token)
-
-                this.$router.push('/home')
-            }
-
-        },
-
-        _reset() {
-            this.password = ''
-            this.email = ''
-            this.name = ''
-        }
+    private password: string = ''
+    private email: string = ''
+    private name: string =  ''
+        
+    private valid(): boolean {
+        return !!(this.password && this.email && this.name)
     }
-})
+
+    private async _submit(): Promise<ToastObject | undefined> {
+
+        if ( !this.valid() ) return this.Error('Todos os campos são obrigatórios')
+
+        const { name, password, email } = this
+        
+        const result = await User.create({ name, password, email })
+
+        if ( !result.success ) return this.Error(result.error)
+
+        const { token } = result.data.result
+
+        this.$store.commit('login', token)
+
+        this.$router.push('/home')
+
+    }
+
+    private _reset(): void {
+        this.password = ''
+        this.email = ''
+        this.name = ''
+    }
+
+}
 
 </script>
 

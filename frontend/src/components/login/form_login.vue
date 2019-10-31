@@ -28,51 +28,51 @@
 </template>
 
 <script lang="ts">
-import Auth from '../../services/auth'
 import Vue from 'vue'
+import Auth from '../../services/auth'
+import AlertMixin from '../../mixins/alert'
+import { ToastObject } from 'vue-toasted'
+import Component, { mixins } from 'vue-class-component'
 
 interface LoginData {
     email: string
     password: string
 }
 
-export default Vue.extend({
+@Component
+export default class FormLogin extends mixins(AlertMixin) {
+    
+    private password: string =  ''
+    private email: string = ''
 
-    data: () => ({
-        email: '',
-        password: ''
-    }),
-
-    methods: {
-        valid() {
-            return this.password !== '' && this.email !== ''
-        },
-
-        async _submit() {
-
-            if ( !this.valid() ) return false
-
-            const { password, email } = this
-
-            const result = await Auth.login(password, email)
-
-            if ( result.success ){
-
-                const { token } = result.data
-
-                this.$store.commit('login', token)
-
-                this.$router.push('/home')
-            }
-
-        },
-
-        _reset() {
-            this.password = ''
-            this.email = ''
-        }
+    private valid(): boolean {
+        return !!(this.password !== '' && this.email !== '')
     }
-})
+
+    private async _submit(): Promise<ToastObject | undefined> {
+
+        if ( !this.valid() ) return this.Error('Todos os campos são obrigatórios')
+
+        const { password, email } = this
+
+        const result = await Auth.login(password, email)
+
+        if ( !result.success ) return this.Error(result.error)
+
+        const { token } = result.data
+
+        this.$store.commit('login', token)
+
+        this.$router.push('/home')
+
+    }
+
+    private  _reset(): void {
+        this.password = ''
+        this.email = ''
+    }
+
+}
 
 </script>
 
