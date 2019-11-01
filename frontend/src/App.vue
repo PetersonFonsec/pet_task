@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <background-animation :viewBox="viewBox"/>
+    <background-animation  z-index :viewBox="viewBox"/>
     
     <transition 
       mode="out-in"      
@@ -35,11 +35,17 @@ export default Vue.extend({
   body{
     overflow-x: hidden;
   }
+
   #app {
     color: #2c3e50;
     text-align: center;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
   }
+
+  [ z-index ] {
+    z-index: -1;
+  }
+
   @keyframes born {
     from{
       opacity: 0;

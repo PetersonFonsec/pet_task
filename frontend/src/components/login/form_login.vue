@@ -56,7 +56,7 @@ export default class FormLogin extends mixins(AlertMixin) {
         const { password, email } = this
 
         const result = await Auth.login(password, email)
-
+        
         if ( !result.success ) return this.Error(result.error)
 
         const { token } = result.data

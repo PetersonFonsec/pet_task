@@ -18,6 +18,7 @@
     "ordered-imports": false,
     "trailing-comma": false,
     "interface-name": false,
+    "arrow-parens": true,
     "quotemark": [true, "single"],
     "semicolon": false,
     "one-line": false,

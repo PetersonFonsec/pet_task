@@ -33,12 +33,6 @@ import AlertMixin from '../../mixins/alert'
 import { ToastObject } from 'vue-toasted'
 import Component, { mixins } from 'vue-class-component'
 
-interface UserCreate {
-    name: string
-    email: string
-    password: string
-}
-
 @Component
 export default class UserFormCreate extends mixins(AlertMixin){
 

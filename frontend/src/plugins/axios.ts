@@ -1,6 +1,13 @@
 'use strict';
 
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { baseURL } from '../global';
 
-export default axios.create({ baseURL })
+const Axios: AxiosInstance  = axios.create({ baseURL })
+
+Axios.interceptors.response.use(
+    (response) => response,
+    (error) =>  error
+);
+
+export default Axios

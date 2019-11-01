@@ -41,13 +41,15 @@ export default class RequestPattern {
             const keys = Object.keys(params)
 
             keys.forEach( ( key: string ) => object4send[key] = params[key] )
-            
+
             const res = await this.axios[method](route, object4send)
-            
+
+            if ( res.status !== 200)  return this.Error(res.response.data.error)
+
             return this.Success(res.data)
 
         } catch (error) {
-            return this.Error(error.response.data.msg)
+            return this.Error(error.response.data.error)
         }
     }
 

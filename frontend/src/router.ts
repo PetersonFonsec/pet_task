@@ -16,20 +16,22 @@ const routes = [
     children: [
       {
         path: 'signup',
-        component: () => import(/* webpackChunkName: "signup" */ './components/login/form_create_user.vue')
+        component: () => 
+          import(/* webpackChunkName: "signup" */ './components/login/form_create_user.vue')
       },
       {
         path: 'login',
-        component: () => import(/* webpackChunkName: "login" */ './components/login/form_login.vue')
+        component: () => 
+          import(/* webpackChunkName: "login" */ './components/login/form_login.vue')
       },
     ]
   },
   {
     path: '/home',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ './views/Login.vue'),
+    component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   },
 ];
