@@ -1,0 +1,41 @@
+version: '3'
+networks:
+  database:
+services:
+  database:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: PetTaskManange
+    volumes:
+      - ./database:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - database
+  backend:
+    image: node:12
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - database
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/backend
+    links:
+      - database
+    networks:
+      - database
+    command: bash ./backend/init.sh
+  frontend:
+    image: node:12
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - backend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/frontend
+    command: bash ./frontend/init.sh
